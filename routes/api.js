@@ -21,9 +21,9 @@ router.post('/notes',(req,res)=>{
     }
     notes.push(newNotes);
 
-    let noteString = JSON.stringify(notes,null,3)
+    let notesString = JSON.stringify(notes,null,3)
 
-    fs.writeFile(`./db/db.json`,noteString,(err)=>
+    fs.writeFile(`./db/db.json`,notesString,(err)=>
     err ? console.error(err) : console.log(`New note has been added!`))
 
     const response = {
@@ -40,26 +40,27 @@ else{
 })
 
 //Delete requests
-router.delete('/notes/:id',(req,res)=>{
-    const{id}=req.params;
+router.delete('/notes/:id', (req, res) => {
+    const { id } = req.params;
 
     fs.readFile("./db/db.json", "utf8", (error, data) =>
-    err ? console.err(err) :  (notes = JSON.parse(data))
-    )
+    error ? console.error(error) : (notes = JSON.parse(data))
+    );
 
-    const deletedNote =notes.filter(note =>note.id === req.params.id)
-    if(deletedNote){
-        let filteredNotes=notes.filter(note =>note.id!=req.params.id)
-        let notesString=JSON.stringify(filteredNotes,null,3)
+    const deletedNote = notes.find(note => note.id === req.params.id)
+
+    if(deletedNote) {
+        let filteredNotes = notes.filter(note => note.id != req.params.id)
+        let notesString = JSON.stringify(filteredNotes, null, 3);
         fs.writeFile(`./db/db.json`, notesString, (err) =>
         err
         ? console.error(err)
         : console.log(`Note deleted!`));
+
         res.status(200).json(filteredNotes);
-    }
-    else{
+    } else {
         res.status(500).json('Error deleting note');
     }
+});
 
-})
 module.exports = router;
