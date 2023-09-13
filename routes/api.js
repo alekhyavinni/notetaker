@@ -55,6 +55,11 @@ router.delete('/notes/:id',(req,res)=>{
         err
         ? console.error(err)
         : console.log(`Note deleted!`));
-        
+        res.status(200).json(filteredNotes);
     }
+    else{
+        res.status(500).json('Error deleting note');
+    }
+
 })
+module.exports = router;
