@@ -10,4 +10,4 @@
 # description
 An application known as 'Note Taker' designed to facilitate the creation, storage, and retrieval of user-generated notes. This application will employ an Express.js backend framework to handle HTTP requests and will utilize a JSON file as the storage mechanism for note data.
 
-![note-taker](https://bootcampspot.instructure.com/courses/3546/files/2638774/preview)
+![note-taker](public/assets/images/11-express-homework-demo-01.png)
