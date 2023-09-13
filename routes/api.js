@@ -25,5 +25,17 @@ router.post('/notes',(req,res)=>{
 
     fs.writeFile(`./db/db.json`,noteString,(err)=>
     err ? console.error(err) : console.log(`New note has been added!`))
-    }
+
+    const response = {
+        status: 'success',
+        body: newNote,
+    };
+    console.log(response)
+    res.status(201).json(response)
+}
+else{
+    res.status(500).json('Error in adding note');
+}
+
 })
+
